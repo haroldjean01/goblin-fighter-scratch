@@ -1,7 +1,8 @@
 /* Imports */
 
 /* Get DOM Elements */
-
+const = hpDisplay 
+const = 
 /* State */
 
 /* Events */

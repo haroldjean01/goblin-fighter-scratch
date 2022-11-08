@@ -33,3 +33,27 @@ header .logo {
 main {
     padding: 20px;
 }
+
+#left-side {
+    position: left;
+}
+
+#right-side {
+    position: right;
+}
+
+#goblin-input {
+    width: 90px;
+}
+
+#goblin-button {
+    width: 90px;
+}
+
+#first-goblin {
+    width: 90px;
+}
+
+#second-goblin {
+    width: 90px;
+}

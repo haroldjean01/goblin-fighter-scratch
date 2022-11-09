@@ -1,21 +1,33 @@
 /* Imports */
 import { renderGoblin, renderHealth } from './render-utils.js';
-
-/* Get DOM Elements */
-const healthEl = document.querySelector('health');
-const goblinEl = document.querySelector('goblins-stats');
-const goblinInput = document.querySelector('goblin-input');
-const addGoblinButton = document.getElementById('goblin-button');
+const healthEl = document.querySelector('#health');
+const goblinKillEl = document.querySelector('#goblins-stats');
+const imgEl = document.querySelector('#img');
 const goblinForm = document.querySelector('form');
+const goblinsListEl = document.querySelector('#goblins');
 
 /* State */
-let GoblinData = 0;
+let goblinAmountCount = 0;
 let healthCount = 10;
-let goblinCount = 10;
-const goblinData = [
-    { id: 1, name: 'Mean One', hp: 5 },
-    { id: 2, name: 'Big Bad One', hp: 5 },
+let goblinData = [
+    { id: 1, name: 'Green Goblin', hp: 5 },
+    { id: 2, name: 'Yellow Goblin', hp: 5 },
 ];
+let currentId = 2;
+
+//Submit New Goblins function
+goblinForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(goblinForm);
+    const goblinInput = data.get('goblin-input');
+
+    const newGoblin = {
+        id: currentId,
+        name: goblinInput,
+        hp: Math.ceil(Math.random() * 5),
+    };
+    currentId++;
+});
 
 /* Events */
 goblinInput.addEventListener('click', () => {
@@ -29,10 +41,10 @@ goblinInput.addEventListener('click', () => {
 });
 /* Display Functions */
 function displayGoblins() {
-    goblinEl.textContent = '';
+    goblinKillEl.textContent = '';
     for (let goblin of goblinData) {
-        const goblinEl = renderGoblin(goblin);
-        goblinEl.addEventListener('click', () => {
+        const goblinKillEl = renderGoblin(goblin);
+        goblinKillEl.addEventListener('click', () => {
             if (goblin.satisfaction < 2 && goblinCount > 0) {
                 goblin.satisfaction++;
                 displayGoblins();
@@ -45,7 +57,7 @@ addGoblinButton.addEventListener('submit', (e) => {
     // prevent default behavior of a form submit
     e.preventDefault();
 
-    const data = new GoblinData(goblinEl);
+    const data = new GoblinData(goblinKillEl);
 
     //make a new goblin object with the user input
     const goblinId = {
@@ -64,19 +76,6 @@ addGoblinButton.addEventListener('submit', (e) => {
 
 /* Display Functions */
 
-// function displaygoblins() {
-//     goblinEl.textContent = '';
-
-//     for (let goblin of goblins) {
-//         const goblinEl = renderGoblin(goblin);
-//         goblinEl.addEventListener('click', () => {
-//             goblinClickHandler(goblin);
-//         });
-//         goblinListEl.append(goblinEl);
-//     }
-// }
-
-displayGoblins();
 // (don't forget to call any display functions you want to run on page load!)
 displayGoblinStats();
 displayHeath();

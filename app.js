@@ -52,55 +52,28 @@ function goblinClickHandler(goblinData) {
             imgEl.classList.add('You-Lost');
             alert('YOU LOSE!');
         }
+        healthEl.textContent = healthCount;
+goblinKillEl.textContent = goblinAmountCount;
     }
+    const hpEl = document.getElementById(`goblin-hp-${goblinData.id}`);
+hpEl.textContent = goblinData.hp < 0 ? 0 : goblinData.hp;
+
+const faceEl = document.getElementById(`goblin-face-${goblinData.id}`);
+faceEl.textContent = goblinData.hp > 0 ? '👿' : '🔥';
 }
 
-// goblinInput.addEventListener('click', () => {
-//     if (Math.random() > 0.7) {
-//         alert('You hit the goblin!');
-//     } else if (Math.random() > 0.5) {
-//         alert('You missed! No damage');
-//     } else {
-//         alert('You missed! You took damage');
-//     }
-// });
 // /* Display Functions */
-// function displayGoblins() {
-//     goblinKillEl.textContent = '';
-//     for (let goblin of goblinData) {
-//         const goblinKillEl = renderGoblin(goblin);
-//         goblinKillEl.addEventListener('click', () => {
-//             if (goblin.satisfaction < 2 && goblinCount > 0) {
-//                 goblin.satisfaction++;
-//                 displayGoblins();
-//             }
-//         });
-//     }
-// }
-// //add new names
-// addGoblinButton.addEventListener('submit', (e) => {
-//     // prevent default behavior of a form submit
-//     e.preventDefault();
-
-//     const data = new GoblinData(goblinKillEl);
-
-//     //make a new goblin object with the user input
-//     const goblinId = {
-//         id: goblinData,
-//         name: data.get('goblin-name'),
-//         hp: Math.ceil(Math.random() * 5),
-//     };
-
-//     goblinId++;
-
-//     //add newgoblin object to the array of goblins in state
-//     goblins.push(newGoblin);
-
-//     displaygoblins();
-// });
-
-// /* Display Functions */
-
+function displayGoblins() {
+    goblinsListEl.textContent = '';
+    for (let goblin of goblinData) {
+        const goblinEl = renderGoblin(goblin);
+        goblinEl.addEventListener('click', () => {
+            goblinClickHandler(goblin);
+        });
+        goblinKillEl.append(goblinEl);
+    }
+}
+displayGoblins();
 // // (don't forget to call any display functions you want to run on page load!)
 // displayGoblinStats();
 // displayHeath();

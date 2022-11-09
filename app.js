@@ -27,56 +27,81 @@ goblinForm.addEventListener('submit', (e) => {
         hp: Math.ceil(Math.random() * 5),
     };
     currentId++;
+    goblinData.push(newGoblin);
+    displayGoblins();
 });
 
 /* Events */
-goblinInput.addEventListener('click', () => {
-    if (Math.random() > 0.7) {
-        alert('You hit the goblin!');
-    } else if (Math.random() > 0.5) {
-        alert('You missed! No damage');
+
+function goblinClickHandler(goblinData) {
+    if (goblinData.hp <= 0) return;
+    if (Math.random() < 0.33) {
+        goblinData.hp--;
+        alert('you smacked ' + goblinData.name);
     } else {
-        alert('You missed! You took damage');
+        alert(goblinData.name + ' dodged it');
     }
-});
-/* Display Functions */
-function displayGoblins() {
-    goblinKillEl.textContent = '';
-    for (let goblin of goblinData) {
-        const goblinKillEl = renderGoblin(goblin);
-        goblinKillEl.addEventListener('click', () => {
-            if (goblin.satisfaction < 2 && goblinCount > 0) {
-                goblin.satisfaction++;
-                displayGoblins();
-            }
-        });
+    if (Math.random() < 0.5) {
+        healthCount--;
+        alert(goblinData.name + ' smacked you');
+    } else {
+        alert(goblinData.hp === 0) {
+            goblinKillEl++;
+        }
+        if(healthCount === 0) {
+            imgEl.classList.add('You-Lost');
+            alert('YOU LOSE!');
+        }
     }
 }
-//add new names
-addGoblinButton.addEventListener('submit', (e) => {
-    // prevent default behavior of a form submit
-    e.preventDefault();
 
-    const data = new GoblinData(goblinKillEl);
+// goblinInput.addEventListener('click', () => {
+//     if (Math.random() > 0.7) {
+//         alert('You hit the goblin!');
+//     } else if (Math.random() > 0.5) {
+//         alert('You missed! No damage');
+//     } else {
+//         alert('You missed! You took damage');
+//     }
+// });
+// /* Display Functions */
+// function displayGoblins() {
+//     goblinKillEl.textContent = '';
+//     for (let goblin of goblinData) {
+//         const goblinKillEl = renderGoblin(goblin);
+//         goblinKillEl.addEventListener('click', () => {
+//             if (goblin.satisfaction < 2 && goblinCount > 0) {
+//                 goblin.satisfaction++;
+//                 displayGoblins();
+//             }
+//         });
+//     }
+// }
+// //add new names
+// addGoblinButton.addEventListener('submit', (e) => {
+//     // prevent default behavior of a form submit
+//     e.preventDefault();
 
-    //make a new goblin object with the user input
-    const goblinId = {
-        id: goblinData,
-        name: data.get('goblin-name'),
-        hp: Math.ceil(Math.random() * 5),
-    };
+//     const data = new GoblinData(goblinKillEl);
 
-    goblinId++;
+//     //make a new goblin object with the user input
+//     const goblinId = {
+//         id: goblinData,
+//         name: data.get('goblin-name'),
+//         hp: Math.ceil(Math.random() * 5),
+//     };
 
-    //add newgoblin object to the array of goblins in state
-    goblins.push(newGoblin);
+//     goblinId++;
 
-    displaygoblins();
-});
+//     //add newgoblin object to the array of goblins in state
+//     goblins.push(newGoblin);
 
-/* Display Functions */
+//     displaygoblins();
+// });
 
-// (don't forget to call any display functions you want to run on page load!)
-displayGoblinStats();
-displayHeath();
-displayGoblins();
+// /* Display Functions */
+
+// // (don't forget to call any display functions you want to run on page load!)
+// displayGoblinStats();
+// displayHeath();
+// displayGoblins();

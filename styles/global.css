@@ -32,6 +32,8 @@ header .logo {
 
 main {
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #left-side {
@@ -43,17 +45,34 @@ main {
 }
 
 #goblin-input {
-    width: 90px;
+    width: 200px;
+    height: 100px;
 }
 
 #goblin-button {
-    width: 90px;
+    width: 200px;
+    height: 100px;
 }
 
 #first-goblin {
-    width: 90px;
+    width: 200px;
+    height: 100px;
+    background-color: blueviolet;
+    text-align: center;
+    vertical-align: text-bottom;
+    gap: 90px;
 }
 
 #second-goblin {
-    width: 90px;
+    width: 200px;
+    height: 100px;
+    background-color: blueviolet;
+    text-align: center;
+    vertical-align: text-bottom;
+    gap: 90px;
+}
+
+#form {
+    flex-direction: right;
+    position: right;
 }

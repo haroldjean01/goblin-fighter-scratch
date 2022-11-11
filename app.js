@@ -1,10 +1,10 @@
 /* Imports */
-import { renderGoblin, renderHealth } from './render-utils.js';
+import { renderGoblin } from './render-utils.js';
 const healthEl = document.querySelector('#health');
 const goblinKillEl = document.querySelector('#goblins-stats');
 const imgEl = document.querySelector('#img');
 const goblinForm = document.querySelector('form');
-const goblinsListEl = document.querySelector('#goblins');
+const goblinsListEl = document.querySelector('.goblins');
 
 /* State */
 let goblinAmountCount = 0;
@@ -19,7 +19,7 @@ let currentId = 2;
 goblinForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(goblinForm);
-    const goblinInput = data.get('goblin-input');
+    const goblinInput = data.get('goblin-name');
 
     const newGoblin = {
         id: currentId,
@@ -27,8 +27,8 @@ goblinForm.addEventListener('submit', (e) => {
         hp: Math.ceil(Math.random() * 5),
     };
     currentId++;
-    goblinData.push(newGoblin);
-    displayGoblins();
+    // goblinData.push(newGoblin);
+    // displayGoblins();
 });
 
 /* Events */
@@ -45,22 +45,23 @@ function goblinClickHandler(goblinData) {
         healthCount--;
         alert(goblinData.name + ' smacked you');
     } else {
-        alert(goblinData.hp === 0) {
-            goblinKillEl++;
-        }
-        if(healthCount === 0) {
-            imgEl.classList.add('You-Lost');
-            alert('YOU LOSE!');
-        }
-        healthEl.textContent = healthCount;
-goblinKillEl.textContent = goblinAmountCount;
+        alert('You dodged hit from ' + goblinData.name);
     }
-    const hpEl = document.getElementById(`goblin-hp-${goblinData.id}`);
+    if (goblinData.hp === 0) {
+        goblinAmountCount++;
+    }
+    if (healthCount === 0) {
+        imgEl.classList.add('You-Lost');
+        alert('YOU LOSE!');
+    }
+    healthEl.textContent = healthCount;
+    goblinKillEl.textContent = goblinAmountCount;
+}
+const hpEl = document.getElementById(`goblin-hp-${goblinData.id}`);
 hpEl.textContent = goblinData.hp < 0 ? 0 : goblinData.hp;
 
 const faceEl = document.getElementById(`goblin-face-${goblinData.id}`);
-faceEl.textContent = goblinData.hp > 0 ? '👿' : '🔥';
-}
+faceEl.textContent = goblinData.hp > 0 ? '😈' : '🔥';
 
 // /* Display Functions */
 function displayGoblins() {
@@ -70,11 +71,9 @@ function displayGoblins() {
         goblinEl.addEventListener('click', () => {
             goblinClickHandler(goblin);
         });
-        goblinKillEl.append(goblinEl);
+        goblinsListEl.append(goblinEl);
     }
 }
 displayGoblins();
+
 // // (don't forget to call any display functions you want to run on page load!)
-// displayGoblinStats();
-// displayHeath();
-// displayGoblins();

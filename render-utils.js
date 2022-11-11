@@ -1,33 +1,23 @@
-export function renderHealth() {
-    const div = document.createElement('div');
-    div.classList.add('health');
-
-    return div;
-}
-
-export function renderGoblin(goblin) {
-    const div = document.createElement('div');
+export function renderGoblin(goblinData) {
+    const goblinEl = document.createElement('div');
+    const faceEl = document.createElement('p');
     const nameEl = document.createElement('p');
-    const emojiEl = document.createElement('p');
+    const hpEl = document.createElement('p');
 
-    div.classList.add('goblin');
-    nameEl.classList.add('name');
-    emojiEl.classList.add('emoji');
+    goblinEl.classList.add('goblin');
 
-    nameEl.textContent = goblin.name;
+    nameEl.textContent = goblinData.name;
+    hpEl.id = `goblin-hp-${goblinData.id}`;
+    hpEl.textContent = goblinData.hp < 0 ? 0 : goblinData.hp;
 
-    if (goblin.satisfaction === 1) {
-        emojiEl.textContent = '😒';
+    faceEl.id = `goblin-face-${goblinData.id}`;
+    faceEl.textContent = goblinData.hp > 0 ? '😈' : '🔥';
+
+    if (goblinData.hp < 0) {
+        goblinEl.classList.add('dead');
     }
 
-    if (goblin.satisfaction === 2) {
-        emojiEl.textContent = '😐';
-    }
+    goblinEl.append(nameEl, faceEl, hpEl);
 
-    if (goblin.satisfaction === 3) {
-        emojiEl.textContent = '😀';
-    }
-
-    div.append(nameEl, emojiEl);
-    return div;
+    return goblinEl;
 }

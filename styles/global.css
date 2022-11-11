@@ -44,8 +44,8 @@ main {
     position: right;
 }
 
-#goblin-input {
-    width: 200px;
+#goblin-button {
+    width: 100px;
     height: 100px;
 }
 
@@ -54,25 +54,10 @@ main {
     height: 100px;
 }
 
-#first-goblin {
-    width: 200px;
-    height: 100px;
-    background-color: blueviolet;
-    text-align: center;
-    vertical-align: text-bottom;
-    gap: 90px;
-}
-
-#second-goblin {
-    width: 200px;
-    height: 100px;
-    background-color: blueviolet;
-    text-align: center;
-    vertical-align: text-bottom;
-    gap: 90px;
-}
-
-#form {
+#goblin-name {
     flex-direction: right;
     position: right;
+    width: 300px;
+    height: 100px;
+    text-align: center;
 }

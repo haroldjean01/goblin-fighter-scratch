@@ -1,79 +1,99 @@
-/* Imports */
+// import functions and grab DOM elements
 import { renderGoblin } from './render-utils.js';
-const healthEl = document.querySelector('#health');
-const goblinKillEl = document.querySelector('#goblins-stats');
-const imgEl = document.querySelector('#img');
-const goblinForm = document.querySelector('form');
-const goblinsListEl = document.querySelector('.goblins');
+const defeatedNumberEl = document.querySelector('#goblins-stats');
+const adventurerHPEl = document.querySelector('#health');
+const adventurerImgEl = document.querySelector('#img');
+const form = document.querySelector('form');
+const goblinListEl = document.querySelector('.goblins');
 
-/* State */
-let goblinAmountCount = 0;
-let healthCount = 10;
-let goblinData = [
-    { id: 1, name: 'Green Goblin', hp: 5 },
-    { id: 2, name: 'Yellow Goblin', hp: 5 },
+// let state
+let defeatedGoblinsCount = 0;
+let playerHP = 10;
+let goblins = [
+    { id: 1, name: 'Terry', hp: 1 },
+    { id: 2, name: 'Professor Goblin', hp: 4 },
 ];
-let currentId = 2;
+let currentId = 3;
 
-//Submit New Goblins function
-goblinForm.addEventListener('submit', (e) => {
+// - New goblin form
+form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData(goblinForm);
-    const goblinInput = data.get('goblin-name');
+    //   - User has supplied a name and submitted the form
+    const data = new FormData(form);
+
+    const goblinName = data.get('goblin-name');
+
+    //   - Make a new goblin object with that user input
 
     const newGoblin = {
         id: currentId,
-        name: goblinInput,
+        name: goblinName,
         hp: Math.ceil(Math.random() * 5),
     };
     currentId++;
-    // goblinData.push(newGoblin);
-    // displayGoblins();
-});
 
-/* Events */
+    //   - Add that object to the array of goblins in state
+    goblins.push(newGoblin);
+
+    displayGoblins();
+});
 
 function goblinClickHandler(goblinData) {
     if (goblinData.hp <= 0) return;
     if (Math.random() < 0.33) {
         goblinData.hp--;
-        alert('you smacked ' + goblinData.name);
+        alert('you hit ' + goblinData.name);
     } else {
-        alert(goblinData.name + ' dodged it');
+        alert('you tried to hit ' + goblinData.name + ' but missed');
     }
+    //  - possibly decrement player HP
     if (Math.random() < 0.5) {
-        healthCount--;
-        alert(goblinData.name + ' smacked you');
+        playerHP--;
+        alert(goblinData.name + ' hit you!');
     } else {
-        alert('You dodged hit from ' + goblinData.name);
+        alert(goblinData.name + ' tried to hit you but missed!');
     }
+
     if (goblinData.hp === 0) {
-        goblinAmountCount++;
+        defeatedGoblinsCount++;
     }
-    if (healthCount === 0) {
-        imgEl.classList.add('You-Lost');
-        alert('YOU LOSE!');
+
+    if (playerHP === 0) {
+        adventurerImgEl.classList.add('game-over');
+        alert('GAME OVER!!!');
     }
-    healthEl.textContent = healthCount;
-    goblinKillEl.textContent = goblinAmountCount;
+    //     - update the DOM with new goblin, player, and defeated goblin state.
+    adventurerHPEl.textContent = 'You have ' + playerHP + ' HP';
+    defeatedNumberEl.textContent =
+        'You have defeated ' + defeatedGoblinsCount + ' goblins spiderman';
+
+    const hpEl = document.getElementById(`goblin-hp-${goblinData.id}`);
+    hpEl.textContent = goblinData.hp < 0 ? 0 : goblinData.hp;
+
+    const faceEl = document.getElementById(`goblin-face-${goblinData.id}`);
+    faceEl.textContent = goblinData.hp > 0 ? '😈' : '🔥';
 }
-const hpEl = document.getElementById(`goblin-hp-${goblinData.id}`);
-hpEl.textContent = goblinData.hp < 0 ? 0 : goblinData.hp;
 
-const faceEl = document.getElementById(`goblin-face-${goblinData.id}`);
-faceEl.textContent = goblinData.hp > 0 ? '😈' : '🔥';
-
-// /* Display Functions */
 function displayGoblins() {
-    goblinsListEl.textContent = '';
-    for (let goblin of goblinData) {
+    //   - "update a list"
+    //     - clear out the list DOM
+    goblinListEl.textContent = '';
+
+    //     - loop through the goblins
+    for (let goblin of goblins) {
+        //     - render a new goblin DOM element for each item
         const goblinEl = renderGoblin(goblin);
+        // - append that element to the HTML
+
+        // now that we have a goblin element, we can make each goblin clickable like so
+        // this is a DYNAMIC EVENT LISTENER. we make a new event listener for every goblin!
+        // an event listener is a property just like anything else. just like text content, just like style. we add it to elements.
         goblinEl.addEventListener('click', () => {
             goblinClickHandler(goblin);
         });
-        goblinsListEl.append(goblinEl);
+
+        goblinListEl.append(goblinEl);
     }
 }
-displayGoblins();
 
-// // (don't forget to call any display functions you want to run on page load!)
+displayGoblins();

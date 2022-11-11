@@ -32,4 +32,32 @@ header .logo {
 
 main {
     padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#left-side {
+    position: left;
+}
+
+#right-side {
+    position: right;
+}
+
+#goblin-button {
+    width: 100px;
+    height: 100px;
+}
+
+#goblin-button {
+    width: 200px;
+    height: 100px;
+}
+
+#goblin-name {
+    flex-direction: right;
+    position: right;
+    width: 300px;
+    height: 100px;
+    text-align: center;
 }

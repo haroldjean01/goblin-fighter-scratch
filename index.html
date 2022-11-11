@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-<head>
-    <!-- metadata -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- title and favicon -->
 
-    <!-- title and favicon -->
-    <title>Web App</title>
-    <link rel="icon" type="image/x-icon" href="assets/alchemy-favicon.png" />
+        <!-- js -->
+        <script type="module" src="app.js"></script>
 
-    <!-- js -->
-    <script type="module" src="app.js"></script>
+        <!-- fonts -->
+        <!-- see https://fonts.google.com/ -->
 
-    <!-- fonts -->
-    <!-- see https://fonts.google.com/ -->
+        <!-- css -->
+        <link rel="stylesheet" href="styles/reset.css" />
+        <link rel="stylesheet" href="styles/global.css" />
+        <!-- add link for page specific css -->
+    </head>
 
-    <!-- css -->
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/global.css" />
-    <!-- add link for page specific css -->
+    <body>
+        <header>
+            <img class="logo" src="assets/spidey.jpeg" alt="logo" />
+            <h1>Goblin Project</h1>
+        </header>
 
-</head>
-
-<body>
-    <header>
-        <img class="logo" src="assets/html_css_js.png" alt="logo">
-        <h1>Web App</h1>
-    </header>
-
-    <main>
-
-    </main>
-
-</body>
-
+        <main>
+            <section id="left-side">
+                <div id="health-display">
+                    <h1 id="health">Your HP:</h1>
+                    <img src="/assets/spidey.jpeg" alt="" id="img" />
+                </div>
+                <div id="emoji-display"></div>
+                <div id="goblin-stats">
+                    <h2 id="goblins-stats">You have defeated</h2>
+                </div>
+            </section>
+            <section id="right-side">
+                <h1 id="New-Goblin">New Goblin:</h1>
+                <form>
+                    <input type="text" name="" id="goblin-name" />
+                    <button id="goblin-button">Challenge Goblin</button>
+                </form>
+                <div class="goblins"></div>
+            </section>
+        </main>
+    </body>
 </html>
